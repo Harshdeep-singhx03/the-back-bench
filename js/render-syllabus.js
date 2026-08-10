@@ -1,79 +1,159 @@
 document.addEventListener('DOMContentLoaded', () => {
     const syllabusContainer = document.getElementById('syllabus-container');
+    const openBtn = document.getElementById('open-syllabus-btn');
+    const notebookModal = document.getElementById('syllabus-notebook-modal');
+    const closeBtn = document.getElementById('close-syllabus-btn');
+    const syllabusNavLinks = document.querySelectorAll('a[href="#syllabus"]');
     
     if (!syllabusContainer || typeof syllabusData === 'undefined') {
         console.error("Syllabus container or data not found");
         return;
     }
 
+    // Build the ONE SINGLE NOTEBOOK experience
+    const notebook = document.createElement('div');
+    notebook.className = 'single-notebook-paper';
+    
+    // Notebook Header
+    const nbHeader = document.createElement('div');
+    nbHeader.className = 'notebook-header';
+    nbHeader.innerHTML = `
+        <div class="notebook-holes"><span></span><span></span><span></span></div>
+        <div class="notebook-title-wrap">
+            <span class="space-mono notebook-tag">SUBJECT: FOOD & DRINKS</span>
+            <h2 class="kalam-title">The Back Bench Syllabus 📖</h2>
+            <p class="notebook-subtitle">Official Canteen Guide & Munchies Menu</p>
+        </div>
+        <div class="notebook-annotation">No boring periods allowed! ✏️</div>
+    `;
+    notebook.appendChild(nbHeader);
+
+    // Notebook Body (Content)
+    const nbBody = document.createElement('div');
+    nbBody.className = 'notebook-body';
+
     syllabusData.forEach((section, index) => {
-        // Create subject board (card)
-        const board = document.createElement('div');
-        board.className = 'cafe-card subject-board';
+        const catBlock = document.createElement('div');
+        catBlock.className = 'notebook-category';
         
-        // Subject Header
-        const header = document.createElement('h3');
-        header.style.marginBottom = '5px';
-        header.textContent = section.subject;
-        board.appendChild(header);
+        // Category Header
+        const catHeader = document.createElement('div');
+        catHeader.className = 'category-header';
         
-        // Subject Note (Subtle Backbench flavor)
+        const catTitle = document.createElement('h3');
+        catTitle.className = 'kalam-category-title';
+        catTitle.innerHTML = `<span class="cat-num">0${index + 1}.</span> ${section.subject}`;
+        
+        const catTag = document.createElement('span');
+        catTag.className = 'space-mono category-tag';
+        catTag.textContent = section.tag || '';
+        
+        catHeader.appendChild(catTitle);
+        if (section.tag) catHeader.appendChild(catTag);
+        catBlock.appendChild(catHeader);
+
         if (section.note) {
-            const note = document.createElement('p');
-            note.className = 'space-mono';
-            note.style.color = 'var(--c-orange)';
-            note.style.fontSize = '0.85rem';
-            note.style.marginBottom = '1.5rem';
-            note.textContent = section.note;
-            board.appendChild(note);
+            const catNote = document.createElement('p');
+            catNote.className = 'notebook-note';
+            catNote.textContent = `/* ${section.note} */`;
+            catBlock.appendChild(catNote);
         }
-        
-        // Items list
+
+        // Category Items List
         const itemList = document.createElement('ul');
-        itemList.style.listStyle = 'none';
-        itemList.style.padding = '0';
+        itemList.className = 'notebook-item-list';
         
         section.items.forEach(item => {
             const li = document.createElement('li');
-            li.style.display = 'flex';
-            li.style.justifyContent = 'space-between';
-            li.style.alignItems = 'baseline';
-            li.style.marginBottom = '12px';
-            li.style.borderBottom = '1px dotted rgba(0,0,0,0.1)';
-            li.style.paddingBottom = '4px';
+            li.className = 'notebook-item';
             
             const nameSpan = document.createElement('span');
-            nameSpan.style.fontFamily = 'var(--font-head)';
-            nameSpan.style.fontSize = '1.05rem';
-            nameSpan.style.fontWeight = '500';
+            nameSpan.className = 'item-name';
             nameSpan.textContent = item.name;
             
+            const leaderDots = document.createElement('span');
+            leaderDots.className = 'item-dots';
+            
             const priceSpan = document.createElement('span');
-            priceSpan.className = 'space-mono';
-            priceSpan.style.fontWeight = '700';
-            priceSpan.style.color = 'var(--c-charcoal-light)';
+            priceSpan.className = 'space-mono item-price';
             priceSpan.textContent = `₹${item.price}`;
             
             li.appendChild(nameSpan);
+            li.appendChild(leaderDots);
             li.appendChild(priceSpan);
             itemList.appendChild(li);
         });
         
-        board.appendChild(itemList);
-        
-        // Add a random subtle doodle occasionally
-        if (Math.random() > 0.7) {
-            const doodle = document.createElement('div');
-            doodle.className = 'doodle';
-            doodle.textContent = ['Must try!', 'Bestseller', 'Chef\'s Pick'][Math.floor(Math.random() * 3)];
-            doodle.style.position = 'absolute';
-            doodle.style.right = '20px';
-            doodle.style.top = '25px';
-            doodle.style.transform = `rotate(${Math.random() * 10 - 5}deg)`;
-            doodle.style.opacity = '0.8';
-            board.appendChild(doodle);
+        catBlock.appendChild(itemList);
+
+        if (index < syllabusData.length - 1) {
+            const divider = document.createElement('div');
+            divider.className = 'notebook-divider';
+            catBlock.appendChild(divider);
         }
         
-        syllabusContainer.appendChild(board);
+        nbBody.appendChild(catBlock);
+    });
+
+    notebook.appendChild(nbBody);
+
+    // Notebook Footer inside modal
+    const nbFooter = document.createElement('div');
+    nbFooter.className = 'notebook-footer';
+    nbFooter.innerHTML = `
+        <p class="space-mono">* All taxes included. Extra cheese on request.</p>
+        <button id="close-notebook-inner" class="btn btn-secondary btn-sm">Close Notebook ✖</button>
+    `;
+    notebook.appendChild(nbFooter);
+
+    syllabusContainer.appendChild(notebook);
+
+    // Toggle Modal Functions
+    function openNotebook() {
+        if (notebookModal) {
+            notebookModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeNotebook() {
+        if (notebookModal) {
+            notebookModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (openBtn) {
+        openBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openNotebook();
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeNotebook);
+    }
+
+    const closeInnerBtn = document.getElementById('close-notebook-inner');
+    if (closeInnerBtn) {
+        closeInnerBtn.addEventListener('click', closeNotebook);
+    }
+
+    if (notebookModal) {
+        notebookModal.addEventListener('click', (e) => {
+            if (e.target === notebookModal) {
+                closeNotebook();
+            }
+        });
+    }
+
+    // Auto-open notebook when clicking Syllabus nav links if user chooses
+    syllabusNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            // Give smooth scroll a moment then open notebook if wanted
+            setTimeout(() => {
+                openNotebook();
+            }, 300);
+        });
     });
 });
