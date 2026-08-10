@@ -12,10 +12,10 @@
         
         /* Hero Section */
         #home {
-            min-height: 85vh;
+            min-height: 75vh;
             display: flex;
             align-items: center;
-            padding: 2rem 5%;
+            padding: 2.5rem 5%;
             position: relative;
             background-color: var(--c-sand);
             overflow: hidden;
@@ -26,27 +26,27 @@
             margin: 0 auto;
             width: 100%;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 2.5rem;
             align-items: center;
             z-index: 2;
         }
         
         .hero-text h1 {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             color: var(--c-charcoal);
         }
         
         .hero-text p.lead {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--c-charcoal-light);
-            margin-bottom: 2.5rem;
-            max-width: 90%;
+            margin-bottom: 1.5rem;
+            max-width: 95%;
         }
         
         .hero-image {
             width: 100%;
-            height: 500px;
+            height: 380px;
             background-color: #f5f5f5;
             border-radius: 12px;
             display: flex;
@@ -55,19 +55,19 @@
             font-family: var(--font-mono);
             color: #999;
             position: relative;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
         }
         
         .accent-doodle {
             position: absolute;
             font-family: var(--font-accent);
             color: var(--c-orange);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transform: rotate(-10deg);
         }
         
-        .accent-doodle.d1 { top: -20px; right: 20px; }
-        .accent-doodle.d2 { bottom: -30px; left: 40px; transform: rotate(5deg); color: var(--c-brown); }
+        .accent-doodle.d1 { top: -15px; right: 20px; }
+        .accent-doodle.d2 { bottom: -20px; left: 30px; transform: rotate(5deg); color: var(--c-brown); }
         
         /* About Section */
         #about {
@@ -75,17 +75,17 @@
         }
         .story-section {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 3rem;
             align-items: center;
         }
         
         .story-image {
             width: 100%;
-            height: 450px;
+            height: 320px;
             background-color: #f0f0f0;
             border-radius: 8px;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -97,8 +97,8 @@
         .story-image::after {
             content: '';
             position: absolute;
-            top: 20px;
-            left: -20px;
+            top: 12px;
+            left: -12px;
             width: 100%;
             height: 100%;
             border: 2px solid var(--c-mustard);
@@ -106,17 +106,94 @@
             z-index: -1;
         }
         
-        /* Syllabus Section */
+        /* Syllabus Teaser Section */
         #syllabus {
             background-color: var(--c-cream);
         }
-        .syllabus-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin: 3rem auto;
+        
+        .syllabus-teaser-card {
+            background: #fcf9f2;
+            border: 2px dashed #e2d7c5;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-sm);
+            position: relative;
         }
-        .subject-board { position: relative; }
+        
+        .syllabus-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1.5rem 0 2rem;
+        }
+        
+        .sy-chip {
+            background: var(--c-sand);
+            color: var(--c-brown);
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(62, 39, 35, 0.15);
+        }
+
+        /* Single Notebook Modal */
+        .syllabus-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .syllabus-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .syllabus-modal-content {
+            max-width: 850px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-close-icon {
+            position: sticky;
+            top: 15px;
+            float: right;
+            margin-right: 15px;
+            z-index: 10;
+            background: var(--c-brown);
+            color: var(--c-white);
+            border: none;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+        }
         
         /* Gallery Section */
         #gallery {
@@ -124,22 +201,21 @@
         }
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
         .gallery-item {
             background: var(--c-white);
-            padding: 10px;
+            padding: 8px;
             box-shadow: var(--shadow-sm);
             border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .gallery-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-        .gallery-item:nth-child(3n) { transform: rotate(1deg); }
-        .gallery-item:nth-child(5n) { transform: rotate(-1deg); }
-        .gallery-item:nth-child(3n):hover, .gallery-item:nth-child(5n):hover { transform: translateY(-5px) rotate(0deg); }
-        .gallery-item .img-placeholder { height: 250px; border-radius: 2px; }
+        .gallery-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .gallery-item:nth-child(2) { transform: rotate(1deg); }
+        .gallery-item .img-placeholder { height: 180px; border-radius: 2px; }
         
         /* Contact Section */
         #contact {
@@ -148,36 +224,48 @@
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-top: 3rem;
+            gap: 2.5rem;
+            margin-top: 2rem;
         }
         .form-container {
             background-color: var(--c-white);
-            padding: 3rem;
+            padding: 2rem;
             border-radius: 8px;
             box-shadow: var(--shadow-sm);
             border: 1px solid rgba(0,0,0,0.03);
         }
-        .form-group { margin-bottom: 1.5rem; display: flex; flex-direction: column; }
-        .form-group label { font-family: var(--font-head); font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--c-charcoal); }
-        .form-group input, .form-group select, .form-group textarea { font-family: var(--font-body); padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 4px; background: #fafafa; font-size: 1rem; outline: none; transition: border-color 0.3s; }
+        .form-group { margin-bottom: 1rem; display: flex; flex-direction: column; }
+        .form-group label { font-family: var(--font-head); font-size: 0.88rem; font-weight: 600; margin-bottom: 0.3rem; color: var(--c-charcoal); }
+        .form-group input, .form-group select, .form-group textarea { font-family: var(--font-body); padding: 0.65rem 0.85rem; border: 1px solid #ddd; border-radius: 4px; background: #fafafa; font-size: 0.95rem; outline: none; transition: border-color 0.3s; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--c-mustard); background-color: var(--c-white); }
-        .map-container { height: 400px; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-sm); }
+        .map-container { height: 280px; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-sm); }
         .map-container iframe { width: 100%; height: 100%; border: none; }
-        .contact-info { margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .contact-info { margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         
         @media (max-width: 992px) {
+            #home { padding: 1.5rem 4%; min-height: auto; }
             .hero-container, .story-section, .contact-container {
                 grid-template-columns: 1fr;
-                gap: 3rem;
+                gap: 1.5rem;
             }
             .hero-container { text-align: center; }
-            .hero-text p.lead { margin: 0 auto 2.5rem; }
+            .hero-text p.lead { margin: 0 auto 1.2rem; font-size: 1rem; }
             .order-actions { justify-content: center; }
-            .hero-image { height: 350px; }
-            .story-image { height: 350px; order: -1; }
-            .form-container { padding: 2rem 1.5rem; }
-            .contact-info { grid-template-columns: 1fr; }
+            .hero-image { height: 220px; }
+            .story-image { height: 200px; order: -1; }
+            .story-text { padding: 0 24px; }
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+            .gallery-item .img-placeholder { height: 120px; }
+            .form-container { padding: 1.25rem 1rem; }
+            .contact-info { grid-template-columns: 1fr; gap: 0.75rem; }
+            .syllabus-teaser-card { padding: 1.5rem 1rem; }
+        }
+
+        @media (max-width: 576px) {
+            .gallery-grid { grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; }
+            .gallery-item { padding: 5px; }
+            .gallery-item .img-placeholder { height: 95px; font-size: 0.75rem; }
+            .gallery-item .caption { font-size: 0.7rem !important; }
         }
     </style>
 </head>
@@ -201,13 +289,13 @@
         <div class="hero-container">
             <div class="hero-text">
                 <h1>Good food. Great company.<br>Zero boring periods.</h1>
-                <p class="lead">From quick bites and coffee to long catch-ups over pizza and Maggi — there’s always a reason to stay a little longer.</p>
+                <p class="lead">The best seat in college was always the last one. Chai that never runs out, Maggi that never disappoints, and absolutely nobody checking if you showed up on time.</p>
                 
                 <div class="order-actions">
-                    <a href="#syllabus" class="btn btn-secondary">View Syllabus</a>
-                    <a href="#contact" class="btn btn-primary">Reserve a Table</a>
-                    <a href="#" class="btn btn-zomato">Order on Zomato</a>
-                    <a href="#" class="btn btn-swiggy">Order on Swiggy</a>
+                    <a href="#syllabus" id="hero-syllabus-btn" class="btn btn-secondary btn-sm">View Syllabus</a>
+                    <a href="#contact" class="btn btn-primary btn-sm">Reserve a Table</a>
+                    <a href="#" class="btn btn-zomato btn-sm">Zomato</a>
+                    <a href="#" class="btn btn-swiggy btn-sm">Swiggy</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -220,9 +308,9 @@
 
     <!-- 2. ABOUT SECTION -->
     <section id="about" class="section-padding container">
-        <div class="text-center" style="margin-bottom: 4rem;">
-            <p class="space-mono" style="color: var(--c-mustard); font-size: 1.1rem; margin-bottom: 0.5rem;">Our Story</p>
-            <h2>Where every seat is the best seat.</h2>
+        <div class="text-center" style="margin-bottom: 2rem;">
+            <p class="space-mono" style="color: var(--c-mustard); font-size: 0.95rem; margin-bottom: 0.2rem;">Our Story</p>
+            <h2>The official hangout spot for unofficial breaks.</h2>
         </div>
         
         <div class="story-section">
@@ -230,12 +318,11 @@
                 <div class="img-placeholder">[Cafe Interior Image Asset]</div>
             </div>
             <div class="story-text">
-                <h3 style="margin-bottom: 1.5rem; font-size: 1.8rem;">Once Upon a <span class="kalam-accent">Free Period...</span></h3>
-                <p>It started with a simple idea: the best conversations, the loudest laughs, and the greatest memories usually happen when you're supposed to be doing something else.</p>
-                <p>We built <strong>The Back Bench</strong> as a tribute to those moments. It’s not just a café—it’s a space designed for everyone to unwind. Whether you're a student catching a break, a professional escaping the office, or a family sharing a weekend meal, there’s a spot here for you.</p>
-                <p>We serve elevated comfort food in an atmosphere where you never feel rushed. Come hungry, leave happy, and enjoy the company.</p>
+                <h3 style="margin-bottom: 0.8rem; font-size: 1.4rem;">Once Upon a <span class="kalam-accent">Free Period...</span></h3>
+                <p>The best memories usually happen when you're supposed to be somewhere else. We built <strong>The Back Bench</strong> to recreate that perfect lunch break feeling—a welcoming spot for great food, endless chai, and honest conversations.</p>
+                <p>Whether you're skipping a boring lecture, escaping the office, or catching up with your squad, we serve comfort food that hits the spot. No bells ringing, no rush.</p>
                 
-                <p class="kalam-accent" style="font-size: 1.5rem; margin-top: 2rem;">
+                <p class="kalam-accent" style="font-size: 1.2rem; margin-top: 1rem;">
                     - The Founders (Class of '26)
                 </p>
             </div>
@@ -245,54 +332,58 @@
     <!-- 3. SYLLABUS SECTION -->
     <section id="syllabus" class="section-padding">
         <div class="container">
-            <div class="page-header" style="padding: 0; background: transparent; text-align: left; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem;">
-                <div>
-                    <h2 style="color: var(--c-brown);">The <span class="kalam-accent">SYLLABUS</span></h2>
-                    <p class="space-mono" style="color: var(--c-charcoal-light); font-size: 1.1rem; margin-bottom: 0;">Something for every craving.</p>
+            <div class="syllabus-teaser-card">
+                <p class="space-mono" style="color: var(--c-orange); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 0.3rem;">Official Canteen Menu</p>
+                <h2 style="color: var(--c-brown); margin-bottom: 0.5rem;">The <span class="kalam-accent">SYLLABUS</span></h2>
+                <p style="font-size: 1rem; color: var(--c-charcoal-light); margin-bottom: 1rem;">Flip open our canteen notebook to check out the full curriculum, from quick morning chai to late-night squad platters.</p>
+                
+                <div class="syllabus-chips">
+                    <span class="sy-chip">Morning Bunk</span>
+                    <span class="sy-chip">Recess Pick</span>
+                    <span class="sy-chip">Lunch Break</span>
+                    <span class="sy-chip">Free Period Fuel</span>
+                    <span class="sy-chip">Principal's Special</span>
+                    <span class="sy-chip">Last Bench Favorite</span>
                 </div>
-                <div class="order-actions">
-                    <a href="#" class="btn btn-zomato">Order on Zomato</a>
-                    <a href="#" class="btn btn-swiggy">Order on Swiggy</a>
+
+                <div style="display: flex; gap: 0.75rem; justify-content: center; align-items: center; flex-wrap: wrap;">
+                    <button id="open-syllabus-btn" class="btn btn-primary">Open Syllabus Notebook</button>
+                    <a href="#" class="btn btn-zomato btn-sm">Order on Zomato</a>
+                    <a href="#" class="btn btn-swiggy btn-sm">Order on Swiggy</a>
                 </div>
-            </div>
-            
-            <div id="syllabus-container" class="syllabus-grid">
-                <!-- Subjects will be injected here by JS -->
             </div>
         </div>
     </section>
 
+    <!-- SINGLE NOTEBOOK MODAL -->
+    <div id="syllabus-notebook-modal" class="syllabus-modal-overlay">
+        <div class="syllabus-modal-content">
+            <button id="close-syllabus-btn" class="modal-close-icon" title="Close Notebook">✖</button>
+            <div id="syllabus-container">
+                <!-- Notebook rendered dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
     <!-- 4. GALLERY SECTION -->
     <section id="gallery" class="section-padding container">
         <div class="text-center">
-            <p class="space-mono" style="color: var(--c-mustard); font-size: 1.1rem; margin-bottom: 0.5rem;">Gallery</p>
-            <h2>Caught on camera.</h2>
+            <p class="space-mono" style="color: var(--c-mustard); font-size: 0.95rem; margin-bottom: 0.2rem;">Class Yearbook</p>
+            <h2>Caught in the act.</h2>
         </div>
         
         <div class="gallery-grid">
             <div class="gallery-item">
-                <div class="img-placeholder">[Cafe Interior]</div>
-                <div class="text-center space-mono" style="margin-top: 10px; font-size: 0.8rem; color: #777;">Where the magic happens.</div>
+                <div class="img-placeholder">[Cafe Vibe]</div>
+                <div class="text-center space-mono caption" style="margin-top: 6px; font-size: 0.78rem; color: #777;">The ultimate hangout.</div>
             </div>
             <div class="gallery-item">
-                <div class="img-placeholder">[Burger Combo]</div>
-                <div class="text-center space-mono" style="margin-top: 10px; font-size: 0.8rem; color: #777;">The perfect combo.</div>
+                <div class="img-placeholder">[Maggi & Chai]</div>
+                <div class="text-center space-mono caption" style="margin-top: 6px; font-size: 0.78rem; color: #777;">Recess sorted.</div>
             </div>
             <div class="gallery-item">
-                <div class="img-placeholder">[Group of Friends]</div>
-                <div class="text-center space-mono" style="margin-top: 10px; font-size: 0.8rem; color: #777;">The usual suspects.</div>
-            </div>
-            <div class="gallery-item">
-                <div class="img-placeholder">[Maggi Bowl]</div>
-                <div class="text-center space-mono" style="margin-top: 10px; font-size: 0.8rem; color: #777;">Comfort in a bowl.</div>
-            </div>
-            <div class="gallery-item">
-                <div class="img-placeholder">[Chai Glasses]</div>
-                <div class="text-center space-mono" style="margin-top: 10px; font-size: 0.8rem; color: #777;">Fuel for the day.</div>
-            </div>
-            <div class="gallery-item">
-                <div class="img-placeholder">[Pizza]</div>
-                <div class="text-center space-mono" style="margin-top: 10px; font-size: 0.8rem; color: #777;">Wood-fired perfection.</div>
+                <div class="img-placeholder">[The Squad]</div>
+                <div class="text-center space-mono caption" style="margin-top: 6px; font-size: 0.78rem; color: #777;">The usual suspects.</div>
             </div>
         </div>
     </section>
@@ -301,14 +392,14 @@
     <section id="contact" class="section-padding">
         <div class="container">
             <div class="text-center">
-                <h2>Your Table is Waiting</h2>
-                <p class="space-mono" style="color: var(--c-mustard); font-size: 1.1rem;">Whether it's a quick bite or a long catch-up.</p>
+                <h2>Save Your Seat</h2>
+                <p class="space-mono" style="color: var(--c-mustard); font-size: 0.95rem;">Bunking officially approved. Claim your spot.</p>
             </div>
             
             <div class="contact-container">
                 <!-- Form -->
                 <div class="form-container">
-                    <h3 style="margin-bottom: 2rem;">Reserve a Spot</h3>
+                    <h3 style="margin-bottom: 1.2rem; font-size: 1.3rem;">Reserve a Spot</h3>
                     <form action="#" method="POST">
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -318,7 +409,7 @@
                             <label for="phone">Phone Number</label>
                             <input type="tel" id="phone" name="phone" required placeholder="+91 90000 00000">
                         </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
                             <div class="form-group">
                                 <label for="date">Date</label>
                                 <input type="date" id="date" name="date" required>
@@ -340,9 +431,9 @@
                         </div>
                         <div class="form-group">
                             <label for="message">Special Requests</label>
-                            <textarea id="message" name="message" rows="3" placeholder="Need a quiet corner or a high chair?"></textarea>
+                            <textarea id="message" name="message" rows="2" placeholder="Need a quiet corner or a high chair?"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Confirm Reservation</button>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Confirm Reservation</button>
                     </form>
                 </div>
                 
@@ -353,16 +444,16 @@
                     </div>
                     <div class="contact-info">
                         <div class="info-block">
-                            <h4 style="font-size: 0.9rem; text-transform: uppercase; color: var(--c-charcoal-light);">Address</h4>
-                            <p style="font-size: 1rem;">123 College Road,<br>Campus Area, City 400001</p>
+                            <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--c-charcoal-light);">Address</h4>
+                            <p style="font-size: 0.95rem; margin-bottom: 0;">123 College Road,<br>Campus Area, City 400001</p>
                         </div>
                         <div class="info-block">
-                            <h4 style="font-size: 0.9rem; text-transform: uppercase; color: var(--c-charcoal-light);">Contact</h4>
-                            <p style="font-size: 1rem;">Phone: +91 98765 43210<br>Email: hello@thebackbench.cafe</p>
+                            <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--c-charcoal-light);">Contact</h4>
+                            <p style="font-size: 0.95rem; margin-bottom: 0;">Phone: +91 98765 43210<br>Email: hello@thebackbench.cafe</p>
                         </div>
-                        <div class="info-block">
-                            <h4 style="font-size: 0.9rem; text-transform: uppercase; color: var(--c-charcoal-light);">Hours</h4>
-                            <p style="font-size: 1rem;">Mon-Fri: 10AM - 11PM<br>Sat-Sun: 9AM - Midnight</p>
+                        <div class="info-block" style="grid-column: span 2;">
+                            <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--c-charcoal-light);">Hours</h4>
+                            <p style="font-size: 0.95rem; margin-bottom: 0;">Mon-Fri: 10AM - 11PM | Sat-Sun: 9AM - Midnight</p>
                         </div>
                     </div>
                 </div>
@@ -372,7 +463,7 @@
 
     <!-- Floating WhatsApp -->
     <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
     </a>
@@ -381,11 +472,11 @@
     <footer>
         <div class="footer-content">
             <div class="footer-col">
-                <h4 style="font-weight: 800; font-size: 1.2rem; letter-spacing: 1px;">THE BACK BENCH</h4>
-                <p>Come hungry. Leave happy. Your spot for great food and good times.</p>
-                <div class="order-actions" style="margin-top: 1.5rem;">
-                    <a href="#" class="btn btn-zomato" style="font-size: 0.8rem; padding: 8px 16px;">Order on Zomato</a>
-                    <a href="#" class="btn btn-swiggy" style="font-size: 0.8rem; padding: 8px 16px;">Order on Swiggy</a>
+                <h4 style="font-weight: 800; font-size: 1.1rem; letter-spacing: 1px;">THE BACK BENCH</h4>
+                <p style="font-size: 0.9rem;">The official hangout spot for unofficial breaks. Your local canteen for great food and good times.</p>
+                <div class="order-actions" style="margin-top: 1rem;">
+                    <a href="#" class="btn btn-zomato btn-sm">Order on Zomato</a>
+                    <a href="#" class="btn btn-swiggy btn-sm">Order on Swiggy</a>
                 </div>
             </div>
             <div class="footer-col">
