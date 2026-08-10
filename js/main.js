@@ -45,4 +45,15 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(section => {
         observer.observe(section);
     });
+
+    const heroSyllabusBtn = document.getElementById('hero-syllabus-btn');
+    if (heroSyllabusBtn) {
+        heroSyllabusBtn.addEventListener('click', (e) => {
+            const openBtn = document.getElementById('open-syllabus-btn');
+            if (openBtn) {
+                openBtn.click();
+            }
+        });
+    }
 });
+
